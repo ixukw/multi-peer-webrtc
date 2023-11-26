@@ -1,6 +1,7 @@
 {
   "name": "4p-turn-game",
   "version": "0.1.0",
+  "homepage": "https://ixukw.github.io/multi-peer-webrtc",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
