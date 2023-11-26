@@ -22,8 +22,8 @@ jobs:
         # You don't have to cat out your secrets file, but if you do it will just show as *** in the logs. It basically just confirms it actually exists.
       - name: Echo secrets
         run: |
-          echo $TEST_ENV_FILE >> src/.env
-          cat src/.env
+          echo $TEST_ENV_FILE >> .env
+          cat .env
         shell: bash
         env:
           # Feel free to rename this variable, but make sure to update it everywhere. You should paste your entire file in your secrets
