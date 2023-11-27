@@ -24,6 +24,10 @@ export default function Host({ hosting, roomId }) {
     function createClientConnection() {
         const client = new Connection(roomId, (state) => {
             if (state === 'connected') dispatch({ type:'add_client', client:client});
+            if (state === 'failed') {
+                client.closeConnection();
+                createClientConnection();
+            }
         }, null, (msg) => setChat(c=> [...c, msg]), true);
         client.receiveConnection();
     }

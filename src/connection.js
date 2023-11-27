@@ -150,7 +150,7 @@ export default function Connection(room, setConState, ablyConnection, onMessage,
         // create and send offer
         dcInit(dc = pc.createDataChannel('chat'));
         const desc = await pc.createOffer();
-        pc.setLocalDescription(desc);
+        await pc.setLocalDescription(desc);
         await channel.publish('offer', {
             description: desc,
             id: connection_id
