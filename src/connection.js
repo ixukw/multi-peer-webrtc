@@ -24,6 +24,9 @@ export default function Connection(room, setConState, ablyConnection, onMessage,
     let connection_id = uuid();
     let dc;
 
+    let countSent = 0;
+    let countRecv = 0;
+
     // Connect to signaling server
     async function connectSignaling() {
         if (ably.connection === 'connected') return;
@@ -59,7 +62,8 @@ export default function Connection(room, setConState, ablyConnection, onMessage,
         // event handlers
         pc.onicecandidate = async (e) => {
             if (e.candidate) {
-                log("sending ice");
+                countSent++;
+                console.log("sending ice", countSent, e.candidate);
                 await channel.publish(`offer-ice-${connection_id}`, { fromHost: isHost, candidate: e.candidate });
             }
         };
@@ -101,7 +105,8 @@ export default function Connection(room, setConState, ablyConnection, onMessage,
         // receive ice candidates from remote peer
         channel.subscribe(`offer-ice-${connection_id}`, async (msg) => {
             if (msg.data.fromHost === isHost) return;
-            log("recv ice");
+            countRecv++;
+            console.log("recv ice", countRecv, new RTCIceCandidate(msg.data.candidate));
             await pc.addIceCandidate(new RTCIceCandidate(msg.data.candidate)).catch(handleError);
         });
     }
@@ -193,7 +198,7 @@ export default function Connection(room, setConState, ablyConnection, onMessage,
 
     function log(msg) {
         var time = new Date();
-        console.trace(`[${time.toLocaleTimeString()}] ${msg}`);
+        console.log(`[${time.toLocaleTimeString()}] ${msg}`);
     }
     function handleError(err) {
         console.trace(err);
