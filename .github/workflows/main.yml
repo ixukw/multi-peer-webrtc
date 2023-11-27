@@ -9,25 +9,25 @@ on:
       - master
 
 jobs:
-  create_env:
-    name: Create Env File from Secrets
-    runs-on: ubuntu-latest
-    
-    steps:
-        # Checkout the branch
-      - name: Checkout
-        uses: actions/checkout@v3
-        
-        # Create the test environment file from Actions Secrets
-        # You don't have to cat out your secrets file, but if you do it will just show as *** in the logs. It basically just confirms it actually exists.
-      - name: Echo secrets
-        run: |
-          echo $TEST_ENV_FILE >> .env
-          cat .env
-        shell: bash
-        env:
-          # Feel free to rename this variable, but make sure to update it everywhere. You should paste your entire file in your secrets
-          TEST_ENV_FILE : ${{secrets.ENV_SECRETS}}
+  #create_env:
+  #  name: Create Env File from Secrets
+  #  runs-on: ubuntu-latest
+  #  
+  #  steps:
+  #      # Checkout the branch
+  #    - name: Checkout
+  #      uses: actions/checkout@v3
+  #      
+  #      # Create the test environment file from Actions Secrets
+  #      # You don't have to cat out your secrets file, but if you do it will just show as *** in the logs. It basically just confirms it actually exists.
+  #    - name: Echo secrets
+  #      run: |
+  #        echo $TEST_ENV_FILE >> .env
+  #        cat .env
+  #      shell: bash
+  #      env:
+  #        # Feel free to rename this variable, but make sure to update it everywhere. You should paste your entire file in your secrets
+  #        TEST_ENV_FILE : ${{secrets.ENV_SECRETS}}
           
   build:
     name: Build
@@ -49,6 +49,8 @@ jobs:
       run: npm run build
       env:
         REACT_APP_ABLY_SECRET_KEY: ${{ secrets.REACT_APP_ABLY_SECRET_KEY }}
+        REACT_APP_TURN_USERNAME: ${{ secrets.REACT_APP_TURN_USERNAME }}
+        REACT_APP_TURN_PASS: ${{ secrets.REACT_APP_TURN_PASS }}
 
     - name: Upload production-ready build files
       uses: actions/upload-artifact@v2
