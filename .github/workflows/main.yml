@@ -47,6 +47,8 @@ jobs:
     
     - name: Build project
       run: npm run build
+      env:
+        REACT_APP_ABLY_SECRET_KEY: ${{ secrets.REACT_APP_ABLY_SECRET_KEY }}
 
     - name: Upload production-ready build files
       uses: actions/upload-artifact@v2
