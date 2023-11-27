@@ -2,7 +2,29 @@ import * as Ably from 'ably';
 import { v4 as uuid } from 'uuid';
 
 export default function Connection(room, setConState, ablyConnection, onMessage, isHost) {
-    const iceServers = { urls: "stun:stun.l.google.com:19302" };
+    const iceServers = [
+        { urls: "stun:stun.l.google.com:19302" },
+        {
+            urls: "turn:a.relay.metered.ca:80",
+            username: process.env.REACT_APP_TURN_USERNAME,
+            credential: process.env.REACT_APP_TURN_PASS,
+        },
+        {
+            urls: "turn:a.relay.metered.ca:80?transport=tcp",
+            username: process.env.REACT_APP_TURN_USERNAME,
+            credential: process.env.REACT_APP_TURN_PASS,
+        },
+        {
+            urls: "turn:a.relay.metered.ca:443",
+            username: process.env.REACT_APP_TURN_USERNAME,
+            credential: process.env.REACT_APP_TURN_PASS,
+        },
+        {
+            urls: "turn:a.relay.metered.ca:443?transport=tcp",
+            username: process.env.REACT_APP_TURN_USERNAME,
+            credential: process.env.REACT_APP_TURN_PASS,
+        },
+    ];
     const channelName = room;
     const ably = ablyConnection ? ablyConnection : new Ably.Realtime.Promise(process.env.REACT_APP_ABLY_SECRET_KEY);
 
