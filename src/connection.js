@@ -14,16 +14,6 @@ export default function Connection(room, setConState, ablyConnection, onMessage,
             username: process.env.REACT_APP_TURN_USERNAME,
             credential: process.env.REACT_APP_TURN_PASS,
         },
-        {
-            urls: "turn:a.relay.metered.ca:443",
-            username: process.env.REACT_APP_TURN_USERNAME,
-            credential: process.env.REACT_APP_TURN_PASS,
-        },
-        {
-            urls: "turn:a.relay.metered.ca:443?transport=tcp",
-            username: process.env.REACT_APP_TURN_USERNAME,
-            credential: process.env.REACT_APP_TURN_PASS,
-        },
     ];
     const channelName = room;
     const ably = ablyConnection ? ablyConnection : new Ably.Realtime.Promise(process.env.REACT_APP_ABLY_SECRET_KEY);
@@ -64,7 +54,7 @@ export default function Connection(room, setConState, ablyConnection, onMessage,
         } catch (err) { handleError(err) };
     }
     async function createConnection() {
-        pc = new RTCPeerConnection({ iceServers: [iceServers] });
+        pc = new RTCPeerConnection({ iceServers: iceServers });
 
         // event handlers
         pc.onicecandidate = async (e) => {
