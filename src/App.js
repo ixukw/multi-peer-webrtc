@@ -13,7 +13,7 @@ function App() {
         <button onClick={() => setHost('host')}>Host Room</button>
         <button onClick={() => setHost('client')}>Join a Room</button>
       </>}
-      {host === 'host' && <Host hosting={true} />}
+      {host === 'host' && <Host hosting={true} roomId="test" />}
       {host === 'client' && <Client roomId="test"/>}
     </div>
   );

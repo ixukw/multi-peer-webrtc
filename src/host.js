@@ -16,13 +16,13 @@ function reducer(state, action) {
     }
 }
 
-export default function Host({ hosting }) {
+export default function Host({ hosting, roomId }) {
     const [clients, dispatch] = useReducer(reducer, { connections: [] });
     const [chat, setChat] = useState([]);
     const [chatInput, setInput] = useState('');
 
     function createClientConnection() {
-        const client = new Connection("test", (state) => {
+        const client = new Connection(roomId, (state) => {
             if (state === 'connected') dispatch({ type:'add_client', client:client});
         }, null, (msg) => setChat(c=> [...c, msg]), true);
         client.receiveConnection();
