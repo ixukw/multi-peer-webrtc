@@ -1,5 +1,6 @@
 import * as Ably from 'ably';
 import { v4 as uuid } from 'uuid';
+import 'webrtc-adapter';
 
 export default function Connection(room, setConState, ablyConnection, onMessage, isHost) {
     const iceServers = [
