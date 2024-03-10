@@ -1,3 +1,7 @@
+# multi-peer-webrtc
+
+A demo for host-client model webrtc networking of n connections.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
