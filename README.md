@@ -1,6 +1,8 @@
 # multi-peer-webrtc
 
-A demo for host-client model webrtc networking of n connections.
+A demo for pseudo-host client webrtc networking model supporting n connections.
+
+A signaling server is still required. [Learn more](https://docs.google.com/document/d/1aTwjvUFPnub3WxGJkoPgYmdNT-oTUtMYCtrKWJdBG2Q/edit?usp=sharing).
 
 # Getting Started with Create React App
 
